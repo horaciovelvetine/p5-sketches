@@ -1,3 +1,4 @@
+import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 
 class Module {
@@ -33,7 +34,7 @@ class Module {
   }
 }
 
-let unit = 40;
+let unit = 50;
 let count;
 let mods = [];
 

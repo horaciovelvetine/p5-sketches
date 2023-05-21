@@ -1,61 +1,73 @@
 html,
 body {
-  margin: 0;
-  padding: 5px;
-  align-items: center;
-  text-align: center;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 5px;
+	align-items: center;
+	text-align: center;
 }
+/* P5 Sketch Canvases (applies) to all) */
 canvas {
-  display: block;
-}
-
-#one {
-  display: block;
-  width: 800px;
-  height: 600px;
-}
-
-#two {
-  display: block;
-  margin-top: 10px;
-  width: 800px;
-  height: 600px;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /* Options in index.html */
 .options {
-  display: inline-block;
-  clear: both;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+	display: inline-block;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
 .option {
-  float: left;
-  padding: 50px;
+	float: left;
+	padding: 50px;
 }
 
 .emoji {
-  font-size: 100px;
-  vertical-align: middle;
-  line-height: 2;
-  clear: both;
-  margin: auto;
+	font-size: 100px;
+	vertical-align: middle;
+	line-height: 2;
+	clear: both;
+	margin: auto;
 }
 
 .description {
-  margin: auto;
-  margin-top: -50px;
+	margin: auto;
+	margin-top: -50px;
 
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 25px;
-  letter-spacing: 0.6px;
-  word-spacing: 2px;
-  color: #000000;
-  font-weight: normal;
-  text-decoration: none;
-  font-style: normal;
-  font-variant: small-caps;
-  text-transform: none;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 25px;
+	letter-spacing: 0.6px;
+	word-spacing: 2px;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: small-caps;
+	text-transform: none;
 }
+
+/* Removes default link decorations */
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+

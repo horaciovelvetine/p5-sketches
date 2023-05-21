@@ -1,3 +1,4 @@
+import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 
 sketch.setup = function () {
