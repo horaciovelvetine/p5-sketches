@@ -1,6 +1,9 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 
+// const WIDTH = 15;
+// const HEIGHT = 15;
+
 class Module {
   constructor(xOff, yOff, x, y, speed, unit) {
     this.xOff = xOff;
@@ -30,7 +33,7 @@ class Module {
   // Custom method for drawing the object
   draw() {
     fill(255);
-    ellipse(this.xOff + this.x, this.yOff + this.y, 6, 6);
+    ellipse(this.xOff + this.x, this.yOff + this.y, 8, 8);
   }
 }
 
@@ -53,7 +56,7 @@ sketch.setup = function () {
         y * unit,
         unit / 2,
         unit / 2,
-        random(0.05, 0.8),
+        random(0.4, 2.0),
         unit
       );
     }

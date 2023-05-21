@@ -31,8 +31,9 @@ canvas {
 }
 
 .emoji {
-	font-size: 100px;
+	font-size: 75px;
 	vertical-align: middle;
+	padding-bottom: 15px;
 	line-height: 2;
 	clear: both;
 	margin: auto;
