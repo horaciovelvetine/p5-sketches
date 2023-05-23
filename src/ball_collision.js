@@ -95,8 +95,8 @@ class Ball {
       bTemp[1].x += vFinal[1].x;
 
       /* Rotate ball this.positions and velocities back
-       Reverse signs in trig expressions to rotate 
-       in the opposite direction */
+        Reverse signs in trig expressions to rotate 
+        in the opposite direction */
       // rotate balls
       let bFinal = [new p5.Vector(), new p5.Vector()];
 
@@ -140,9 +140,9 @@ sketch.draw = function () {
     b.update();
     b.display();
     b.checkBoundaryCollision();
-    balls[0].checkCollision(balls[1]);
-     // I think this should be iterating through the array of 
-     //balls to check for collisions on every ball against 
-     // the current ball being drawn
+    for (let j = i + 1; j < balls.length; j++) {
+      b.checkCollision(balls[j]);
+    }
+
   }
 }
