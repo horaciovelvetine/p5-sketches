@@ -1,29 +1,46 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 
-const ENT_SIZE = 25;
+// CANVAS SIZE
 const WIDTH = 1280;
-const HEIGHT = 720;
-const GRID_SIZE = 10000;
+const HEIGHT = 640;
+
+// EMOJI SPECIFIC CONSTANTS
+const ENT_SIZE = 20; //==> base int used to calculate and scale carious ents
+const NUM_EMOJIS = 25; //==> number of emoji's to be rendered
+const SPEED = 1; //==> used to scale the velocity of the emoji's
+const COLLISION_DELAY = 18; //==> used to prevent emoji's from colliding too often
+
+// GRID
+const GRID_SIZE = NUM_EMOJIS * 5;
 const GRID_WIDTH = Math.ceil(WIDTH / GRID_SIZE);
 const GRID_HEIGHT = Math.ceil(HEIGHT / GRID_SIZE);
 const GRID = new Array(GRID_WIDTH * GRID_HEIGHT).fill(() => []);
-const NUM_EMOJIS = 18;
-const SPEED = 1.5;
-const EMOJI_RADIUS_SCALE = 0.68;
+
+
+const OUTCOMES = {
+  '📝🪨': '📝',
+  '📝✂️': '✂️',
+  '🪨✂️': '🪨',
+  '🪨📝': '📝',
+  '✂️📝': '✂️',
+  '✂️🪨': '🪨',
+};
+
 
 class Emoji {
 
   constructor(x, y) {
     this.emoji = this.getRandEmoji();
     this.position = new p5.Vector(x, y);
-    this.velocity = p5.Vector.random2D().mult(SPEED); //==> 3 is a magic number 
-    this.radius = (ENT_SIZE * EMOJI_RADIUS_SCALE);
-    this.mass = ENT_SIZE * 0.1; //==> 0.1 is a magic number
+    this.velocity = p5.Vector.random2D().mult(SPEED);
+    this.radius = (ENT_SIZE * 0.68);
+    this.mass = ENT_SIZE * 0.1;
+    this.updatesSinceLastCollision = 0;
   }
 
   draw() {
-    textSize(ENT_SIZE);
+    textSize(ENT_SIZE * 1.44);
     text(this.emoji, this.position.x, this.position.y);
   }
 
@@ -34,6 +51,9 @@ class Emoji {
 
   update() {
     this.position.add(this.velocity);
+    if (this.updatesSinceLastCollision > 0) {
+      this.updatesSinceLastCollision--;
+    }
   }
 
   getGridCoordinates() {
@@ -42,25 +62,50 @@ class Emoji {
     return { xInd, yInd }
   }
 
+  playRPS(other) {
+    if (this.emoji === other.emoji) return;
 
-  checkBoundaries() {
-    if (this.position.x > width - this.radius) {
-      this.position.x = width - this.radius;
-      this.velocity.x *= -1;
-    } else if (this.position.x < this.radius) {
-      this.position.x = this.radius;
-      this.velocity.x *= -1;
-    } else if (this.position.y > height - this.radius) {
-      this.position.y = height - this.radius;
-      this.velocity.y *= -1;
-    } else if (this.position.y < this.radius) {
-      this.position.y = this.radius;
-      this.velocity.y *= -1;
+    const handsIn = this.emoji + other.emoji;
+    const outcome = OUTCOMES[handsIn];
+
+    if (!outcome) {
+      console.log('invalid hands in', handsIn)
+      return
+    }
+
+    if (outcome === this.emoji) {
+      other.emoji = this.emoji
+    } else {
+      this.emoji = other.emoji
     }
 
   }
 
+  clamp() {
+    // ensures emojis stay within the canvas
+    const clampedX = Math.max(this.radius, Math.min(WIDTH - this.radius, this.position.x));
+    const clampedY = Math.max(this.radius, Math.min(HEIGHT - this.radius, this.position.y));
+    return { clampedX, clampedY }
+  }
+
+
+  checkBoundaries() {
+    const { clampedX, clampedY } = this.clamp()
+
+    if (clampedX !== this.position.x) {
+      this.velocity.x *= -1;
+    }
+    this.position.x = clampedX;
+
+    if (clampedY !== this.position.y) {
+      this.velocity.y *= -1;
+    }
+    this.position.y = clampedY;
+
+  }
+
   checkCollision(other) {
+    if (this.updatesSinceLastCollision > 0 || other.updatesSinceLastCollision > 0) return;
     // Get distances between the balls components
     let distanceVect = p5.Vector.sub(other.position, this.position);
 
@@ -71,12 +116,18 @@ class Emoji {
     let minDistance = this.radius + other.radius;
 
     if (distanceVectMag < minDistance) {
-      let distanceCorrection = (minDistance - distanceVectMag) / 2.0;
+      // initiate collision
+      // correct to prevent Emoji's sticking on contact
+      let distanceCorrection = (minDistance - distanceVectMag) / 1500.0;
       let d = distanceVect.copy();
       let correctionVector = d.normalize().mult(distanceCorrection);
       other.position.add(correctionVector);
       this.position.sub(correctionVector);
 
+      // plays rock paper scissors
+      this.playRPS(other);
+
+      // begins trig calculations
       // get angle of distanceVect
       let theta = distanceVect.heading();
       // precalculate trig values
@@ -147,6 +198,10 @@ class Emoji {
       this.velocity.y = cosine * vFinal[0].y + sine * vFinal[0].x;
       other.velocity.x = cosine * vFinal[1].x - sine * vFinal[1].y;
       other.velocity.y = cosine * vFinal[1].y + sine * vFinal[1].x;
+
+      // prevent collision from repeating on subsequent frames
+      this.updatesSinceLastCollision = COLLISION_DELAY;
+      other.updatesSinceLastCollision = COLLISION_DELAY;
     }
   }
 
@@ -156,7 +211,7 @@ function updateGrid() {
   for (let i = 0; i < GRID_WIDTH * GRID_HEIGHT; i++) {
     GRID[i] = [];
   }
-  for (const emoji of emojiEnts) {
+  for (const emoji of emojis) {
     const { xInd, yInd } = emoji.getGridCoordinates();
     GRID[yInd * GRID_WIDTH + xInd].push(emoji);
   }
@@ -196,7 +251,15 @@ function checkGridCollisions() {
   }
 }
 
-let emojiEnts = [];
+function checkForWinner(emojis) {
+  const winnerWinnerChickenDinner = emojis[0].emoji
+  for (let i = 1; i < emojis.length; i++) {
+    if (emojis[i].emoji != winnerWinnerChickenDinner) return false;
+  }
+  return true;
+}
+
+let emojis = [];
 
 sketch.setup = () => {
   // called once at top of sketch to setup canvas and some initial set once variables
@@ -204,30 +267,32 @@ sketch.setup = () => {
   noStroke();
   textAlign(CENTER, CENTER);
   for (let i = 0; i < NUM_EMOJIS; i++) {
-    emojiEnts.push(new Emoji(random(WIDTH), random(HEIGHT)));
+    emojis.push(new Emoji(random(WIDTH), random(HEIGHT)));
   }
 }
 
 sketch.draw = () => {
   background("black");
-  for (const emoji of emojiEnts) {
+  for (const emoji of emojis) {
     emoji.update();
     emoji.draw();
     emoji.checkBoundaries();
-
   }
   updateGrid();
   checkGridCollisions();
+  if (checkForWinner(emojis)) {
+    console.log("winner winner chicken dinner");
+    textSize(ENT_SIZE);
+    fill("yellow");
+    textSize(ENT_SIZE*2)
+    text(emojis[0].emoji, WIDTH / 2 - (15 * ENT_SIZE), HEIGHT / 2 );
+    text(emojis[0].emoji, WIDTH / 2 + (15 * ENT_SIZE), HEIGHT / 2);
+    text("Winner Winner Chicken Dinner.", WIDTH / 2, HEIGHT / 2);
+  }
+
 }
 
 
-/* 
 
-TODO: 
-
-- Prevent emojis from getting stuck in each other by implementing some sort of protection on random() calls
-- Add emoji collision mechanics for switching sprites
-
-*/
 
 
