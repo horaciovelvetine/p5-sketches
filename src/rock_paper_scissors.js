@@ -8,7 +8,7 @@ const HEIGHT = 640;
 // EMOJI SPECIFIC CONSTANTS
 const ENT_SIZE = 20; //==> base int used to calculate and scale carious ents
 const NUM_EMOJIS = 25; //==> number of emoji's to be rendered
-const SPEED = 1; //==> used to scale the velocity of the emoji's
+const SPEED = 2.5; //==> used to scale the velocity of the emoji's
 const COLLISION_DELAY = 18; //==> used to prevent emoji's from colliding too often
 
 // GRID
@@ -281,18 +281,12 @@ sketch.draw = () => {
   updateGrid();
   checkGridCollisions();
   if (checkForWinner(emojis)) {
-    console.log("winner winner chicken dinner");
     textSize(ENT_SIZE);
     fill("yellow");
-    textSize(ENT_SIZE*2)
-    text(emojis[0].emoji, WIDTH / 2 - (15 * ENT_SIZE), HEIGHT / 2 );
+    textSize(ENT_SIZE * 2)
+    text(emojis[0].emoji, WIDTH / 2 - (15 * ENT_SIZE), HEIGHT / 2);
     text(emojis[0].emoji, WIDTH / 2 + (15 * ENT_SIZE), HEIGHT / 2);
     text("Winner Winner Chicken Dinner.", WIDTH / 2, HEIGHT / 2);
   }
 
 }
-
-
-
-
-
