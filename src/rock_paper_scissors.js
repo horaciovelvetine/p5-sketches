@@ -2,8 +2,8 @@ import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 
 // CANVAS SIZE
-const WIDTH = 640;
-const HEIGHT = 320;
+const WIDTH = 1280;
+const HEIGHT = 640;
 
 // EMOJI SPECIFIC CONSTANTS
 const ENT_SIZE = 20; //==> base int used to calculate and scale carious ents
