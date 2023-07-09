@@ -4,7 +4,7 @@
 		{
 			"name": "Alkrington",
 			"url": "https://en.wikipedia.org/wiki/Alkrington",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Middleton,_Greater_Manchester",
 				"https://en.wikipedia.org/wiki/Metropolitan_Borough_of_Rochdale",
 				"https://en.wikipedia.org/wiki/Greater_Manchester",
@@ -24,7 +24,7 @@
 		{
 			"name": "Middleton, Greater Manchester",
 			"url": "https://en.wikipedia.org/wiki/Middleton,_Greater_Manchester",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Metropolitan_Borough_of_Rochdale",
 				"https://en.wikipedia.org/wiki/Greater_Manchester",
 				"https://en.wikipedia.org/wiki/River_Irk",
@@ -45,11 +45,11 @@
 				"https://en.wikipedia.org/wiki/Alkrington"
 			]
 		},
-		{ "name": "Metropolitan Borough of Rochdale", "url": "https://en.wikipedia.org/wiki/Metropolitan_Borough_of_Rochdale", "summaryLinks": ["https://en.wikipedia.org/wiki/Metropolitan_borough", "https://en.wikipedia.org/wiki/Greater_Manchester", "https://en.wikipedia.org/wiki/Rochdale"] },
+		{ "name": "Metropolitan Borough of Rochdale", "url": "https://en.wikipedia.org/wiki/Metropolitan_Borough_of_Rochdale", "topLinks": ["https://en.wikipedia.org/wiki/Metropolitan_borough", "https://en.wikipedia.org/wiki/Greater_Manchester", "https://en.wikipedia.org/wiki/Rochdale"] },
 		{
 			"name": "Greater Manchester",
 			"url": "https://en.wikipedia.org/wiki/Greater_Manchester",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Metropolitan_county",
 				"https://en.wikipedia.org/wiki/Ceremonial_counties_of_England",
 				"https://en.wikipedia.org/wiki/North_West_England",
@@ -101,7 +101,7 @@
 		{
 			"name": "Historic counties of England",
 			"url": "https://en.wikipedia.org/wiki/Historic_counties_of_England",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Ceremonial_counties_of_England",
 				"https://en.wikipedia.org/wiki/Home_counties",
 				"https://en.wikipedia.org/wiki/Normans",
@@ -119,7 +119,7 @@
 		{
 			"name": "Lancashire",
 			"url": "https://en.wikipedia.org/wiki/Lancashire",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Lancashire_(disambiguation)",
 				"https://en.wikipedia.org/wiki/Ceremonial_counties_of_England",
 				"https://en.wikipedia.org/wiki/North_West_England",
@@ -163,7 +163,7 @@
 		{
 			"name": "Middle Ages",
 			"url": "https://en.wikipedia.org/wiki/Middle_Ages",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Post-classical_history",
 				"https://en.wikipedia.org/wiki/Middle_Ages_(disambiguation)",
 				"https://en.wikipedia.org/wiki/Medieval_Times",
@@ -232,7 +232,7 @@
 		{
 			"name": "Township (England)",
 			"url": "https://en.wikipedia.org/wiki/Township_(England)",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/England",
 				"https://en.wikipedia.org/wiki/Parish",
 				"https://en.wikipedia.org/wiki/Chapelry",
@@ -247,7 +247,7 @@
 		{
 			"name": "Prestwich-cum-Oldham",
 			"url": "https://en.wikipedia.org/wiki/Prestwich-cum-Oldham",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Parish",
 				"https://en.wikipedia.org/wiki/Salford_Hundred",
 				"https://en.wikipedia.org/wiki/Historic_counties_of_England",
@@ -271,7 +271,7 @@
 		{
 			"name": "Salford Hundred",
 			"url": "https://en.wikipedia.org/wiki/Salford_Hundred",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Salford_(disambiguation)",
 				"https://en.wikipedia.org/wiki/Historic_counties_of_England",
 				"https://en.wikipedia.org/wiki/Lancashire",
@@ -285,12 +285,12 @@
 		{
 			"name": "Municipal Borough of Middleton",
 			"url": "https://en.wikipedia.org/wiki/Municipal_Borough_of_Middleton",
-			"summaryLinks": ["https://en.wikipedia.org/wiki/Municipal_borough", "https://en.wikipedia.org/wiki/Administrative_counties_of_England", "https://en.wikipedia.org/wiki/Lancashire", "https://en.wikipedia.org/wiki/Middleton,_Greater_Manchester"]
+			"topLinks": ["https://en.wikipedia.org/wiki/Municipal_borough", "https://en.wikipedia.org/wiki/Administrative_counties_of_England", "https://en.wikipedia.org/wiki/Lancashire", "https://en.wikipedia.org/wiki/Middleton,_Greater_Manchester"]
 		},
 		{
 			"name": "Manchester",
 			"url": "https://en.wikipedia.org/wiki/Manchester",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Manchester_(disambiguation)",
 				"https://en.wikipedia.org/wiki/Metropolitan_borough",
 				"https://en.wikipedia.org/wiki/Greater_Manchester",
@@ -368,12 +368,12 @@
 		{
 			"name": "Blackley",
 			"url": "https://en.wikipedia.org/wiki/Blackley",
-			"summaryLinks": ["https://en.wikipedia.org/wiki/Blackley_(surname)", "https://en.wikipedia.org/wiki/Blackley,_West_Yorkshire", "https://en.wikipedia.org/wiki/Manchester", "https://en.wikipedia.org/wiki/Lancashire", "https://en.wikipedia.org/wiki/Manchester_city_centre", "https://en.wikipedia.org/wiki/River_Irk"]
+			"topLinks": ["https://en.wikipedia.org/wiki/Blackley_(surname)", "https://en.wikipedia.org/wiki/Blackley,_West_Yorkshire", "https://en.wikipedia.org/wiki/Manchester", "https://en.wikipedia.org/wiki/Lancashire", "https://en.wikipedia.org/wiki/Manchester_city_centre", "https://en.wikipedia.org/wiki/River_Irk"]
 		},
 		{
 			"name": "Local Government Act 1972",
 			"url": "https://en.wikipedia.org/wiki/Local_Government_Act_1972",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Act_of_Parliament",
 				"https://en.wikipedia.org/wiki/Parliament_of_the_United_Kingdom",
 				"https://en.wikipedia.org/wiki/Local_government_in_the_United_Kingdom",
@@ -390,7 +390,7 @@
 		{
 			"name": "Rochdale",
 			"url": "https://en.wikipedia.org/wiki/Rochdale",
-			"summaryLinks": [
+			"topLinks": [
 				"https://en.wikipedia.org/wiki/Rochdale_(disambiguation)",
 				"https://en.wikipedia.org/wiki/Rochedale",
 				"https://en.wikipedia.org/wiki/Greater_Manchester",
