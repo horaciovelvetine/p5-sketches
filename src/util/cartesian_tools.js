@@ -21,8 +21,7 @@ export class CartesianTools {
   }
 
   axisCords3D() {
-    //returns an array of lines to be drawn
-    //in the sketch.draw() function
+    //returns an array of lines to be drawn in the sketch.draw() function
     return [
       [-1000, 0, 0, 1000, 0, 0],
       [0, -1000, 0, 0, 1000, 0],
@@ -31,8 +30,7 @@ export class CartesianTools {
   }
 
   axisCords2D() {
-    //returns an array of lines to be drawn
-    //in the sketch.draw() function
+    //returns an array of lines to be drawn in the sketch.draw() function
     return [
       [-1000, 0, 1000, 0],
       [0, -1000, 0, 1000],
@@ -48,25 +46,28 @@ export class CartesianTools {
   draw3DAxis() {
     // draw the axes
     this.axisCords3D().forEach((cords, i) => {
-      if (i === 0) stroke('red'); // x axis
-      if (i === 1) stroke('green'); // y axis
-      if (i === 2) stroke('blue'); // z axis
+      this.setAxisStrokeColor(i);
       strokeWeight(1);
       line(...cords);
     });
     this.markCenter();
   }
-  
+
   draw2DAxis() {
     // draw the axes
     this.axisCords2D().forEach((cords, i) => {
-      if (i === 0) stroke('red'); // x axis
-      if (i === 1) stroke('green'); // y axis
-      if (i === 2) stroke('blue'); // z axis
+      this.setAxisStrokeColor(i);
       strokeWeight(1);
       line(...cords);
     });
     this.markCenter();
+  }
+
+  setAxisStrokeColor(i) {
+    // set axis colors
+    if (i === 0) stroke('red'); // x axis
+    if (i === 1) stroke('green'); // y axis
+    if (i === 2) stroke('blue'); // z axis
   }
 
   ingestWikiTestData(data) {
@@ -84,7 +85,7 @@ export class CartesianTools {
       let topNode = new Node(nodeData.url, nodeData.topLinks);
       nodes.push(topNode);
       ALL_NODES.push(topNode);
-      
+
     })
 
     nodes.forEach(node => {
@@ -117,6 +118,7 @@ class Node {
     this.id = ALL_NODES.length + 1;
     this.x = null;
     this.y = null;
+    this.z = null;
     this.url = url;
     this.name = this.getNameFromUrl(url);
     this.topLinks = topLinks;
