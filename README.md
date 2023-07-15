@@ -27,3 +27,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - [Re-creating orbit control in 2D](https://stackoverflow.com/questions/68986225/orbitcontrol-in-creategraphics-webgl-on-a-2d-canvas)
 - [Computing the Pixel Coordinates of a 3D Point](https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points.html)
 - [ScratchPixel: index](https://www.scratchapixel.com/index.html)
+- [Computational Geometry Algorithms Library](https://www.cgal.org/)
+- [Computational Gemotry Wiki](https://en.wikipedia.org/wiki/Computational_geometry)
+- [Nearest Neighbor Search](https://en.wikipedia.org/wiki/Nearest_neighbor_search)
+- [Any-angle path planning](https://en.wikipedia.org/wiki/Any-angle_path_planning)
