@@ -14,25 +14,28 @@ sketch.setup = function () {
 sketch.draw = function () {
   background(51);
   orbitControl();
-  normalMaterial();
+  
   let grid = new CartesianTools(width);
 
   let coordinates = testObjects["teapot"];
   // marks the center of the universe
-  torus(30, 5);
 
 
   for (const nodeCord of coordinates) {
+    // draws spheres at each node
     let [x1, y1, z1] = grid.calculateRadiusOffsetCoordinates(nodeCord);
     push();
     translate(x1, y1, z1);
-    sphere(10, 10, 10);
+    if (nodeCord[X] === 0 && nodeCord[Y] === 0 && nodeCord[Z] === 0) {
+      stroke('red');
+    }
+    sphere(10);
     pop();
   }
 
   for (const nextNodeIter of coordinates) {
     let [x1, y1, z1] = grid.calculateRadiusOffsetCoordinates(nextNodeIter);
-
+    // draws lines between nodes of a certain distance from each other
     coordinates.forEach((nodeCord) => {
       if (nextNodeIter !== nodeCord) {
         let [x2, y2, z2] = grid.calculateRadiusOffsetCoordinates(nodeCord);
