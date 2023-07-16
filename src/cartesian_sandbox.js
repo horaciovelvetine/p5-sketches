@@ -27,10 +27,16 @@ sketch.draw = function () {
   if (IS_3D) {
     cartBeforeTheHorse.draw3DAxis();
     orbitControl();
+
+
+    // STOP HERE
   } else {
     // center all items on the 2D canvas
     translate(width / 2, height / 2, 0);
     cartBeforeTheHorse.draw2DAxis();
+    // let localXMax = 700;
+    // let localYMax = 400;
+    
   }
 
 

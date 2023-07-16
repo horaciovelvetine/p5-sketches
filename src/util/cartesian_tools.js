@@ -82,20 +82,21 @@ export class CartesianTools {
     let nodes = [];
     data.forEach(nodeData => {
       // create all primary nodes which have data available for topLinks
-      let topNode = new Node(nodeData.url, nodeData.topLinks);
+      let topNode = new Node(nodeData.url, nodeData.topLinksTo);
       nodes.push(topNode);
       ALL_NODES.push(topNode);
 
     })
 
     nodes.forEach(node => {
-      // create new nodes for each topLinked Node, these will have no topLink data by default
-      node.topLinks.forEach(link => {
+      // create new nodes for each topLinked Node, these will have no topLink data themselves by default
+      node.topLinksTo.forEach(link => {
         let nodeExistsAlready = nodes.find(existingNode => existingNode.url === link);
         if (!nodeExistsAlready) {
-          let linkedNode = new Node(link);
-          nodes.push(linkedNode)
+          let linkedNode = new Node(link, [], [node.id]);
           ALL_NODES.push(linkedNode);
+        } else {
+          nodeExistsAlready.topLinkedBy.push(node.id);
         }
       })
     })
@@ -114,15 +115,17 @@ export class CartesianTools {
 }
 
 class Node {
-  constructor(url, topLinks = []) {
+  constructor(url, topLinks = [], topLinkedBy = []) {
     this.id = ALL_NODES.length + 1;
     this.x = null;
     this.y = null;
     this.z = null;
     this.url = url;
     this.name = this.getNameFromUrl(url);
-    this.topLinks = topLinks;
+    this.topLinksTo = topLinks;
+    this.topLinkedBy = topLinkedBy;
     this.coordHistory = [];
+
   }
 
   getNameFromUrl(url) {
