@@ -12,33 +12,31 @@ export const Z = 2;
 // for now this will mean constraining the mapping of points to the canvas size
 const IS_3D = false;
 
+let sketchGrid;
+let allNodes;
+
 sketch.setup = function () {
   if (IS_3D) createCanvas((windowWidth - 200), (windowHeight - 150), WEBGL);
   else
     createCanvas((windowWidth - 200), (windowHeight - 150));
+  sketchGrid = new CartesianTools(Window.windowWidth - 200, IS_3D);
+  allNodes = sketchGrid.ingestWikiTestData(data);
 
 }
-
-let cartBeforeTheHorse = new CartesianTools(Window.windowWidth - 200, IS_3D);
-let allNodes = cartBeforeTheHorse.ingestWikiTestData(data);
 
 sketch.draw = function () {
   background(51);
   if (IS_3D) {
-    cartBeforeTheHorse.draw3DAxis();
+    sketchGrid.draw3DAxis();
     orbitControl();
-
-
-    // STOP HERE
   } else {
     // center all items on the 2D canvas
     translate(width / 2, height / 2, 0);
-    cartBeforeTheHorse.draw2DAxis();
-    // let localXMax = 700;
-    // let localYMax = 400;
-    
+    sketchGrid.draw2DAxis();
   }
-
-
+  
+  allNodes.forEach(node => {
+    node.draw();
+  });
 
 }

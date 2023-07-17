@@ -79,19 +79,16 @@ export class CartesianTools {
 
   createNodesFromWikiData(data) {
     // data is an array of node objects as JSON;
-    let nodes = [];
     data.forEach(nodeData => {
       // create all primary nodes which have data available for topLinks
       let topNode = new Node(nodeData.url, nodeData.topLinksTo);
-      nodes.push(topNode);
       ALL_NODES.push(topNode);
-
     })
 
-    nodes.forEach(node => {
+    ALL_NODES.forEach(node => {
       // create new nodes for each topLinked Node, these will have no topLink data themselves by default
       node.topLinksTo.forEach(link => {
-        let nodeExistsAlready = nodes.find(existingNode => existingNode.url === link);
+        let nodeExistsAlready = ALL_NODES.find(existingNode => existingNode.url === link);
         if (!nodeExistsAlready) {
           let linkedNode = new Node(link, [], [node.id]);
           ALL_NODES.push(linkedNode);
@@ -100,16 +97,66 @@ export class CartesianTools {
         }
       })
     })
+
+    ALL_NODES.forEach(node => {
+      // add references to the actual node objects to each node's topLink arrays
+      node.topLinksTo = node.topLinksTo.map(link => {
+        return ALL_NODES.find(node => node.url === link)
+      })
+      node.topLinkedBy = node.topLinkedBy.map(link => {
+        return ALL_NODES.find(node => node.id === link)
+      })
+    })
   }
 
   calculateAllNodeCords() {
-    ALL_NODES.forEach(node => {
-      this.calculateNodeCords(node);
-    });
-  }
+    ALL_NODES.forEach((node, i) => {
+      if (i === 0) node.setCoordinates(0, 0, 0);
 
-  calculateNodeCords(node) {
-    console.log(node);
+      //! CHECKS FOR LINKED NODES WITH EXISTING COORDINATES
+      let linkedWithCords = [];
+
+      node.topLinkedBy.forEach(linkedNode => {
+        if (linkedNode.x !== null || linkedNode.y !== null || linkedNode.z !== null) {
+          linkedWithCords.push(linkedNode);
+        }
+      })
+
+      node.topLinksTo.forEach(linkedNode => {
+        if (linkedNode.x !== null || linkedNode.y !== null || linkedNode.z !== null) {
+          linkedWithCords.push(linkedNode);
+        }
+      });
+
+      if (linkedWithCords.length > 0) {
+
+
+        let linkCounts = [];
+        linkedWithCords.forEach(linkedNode => {
+          if (!linkCounts.find(link => link.id === linkedNode.id)) {
+            linkCounts.push({ count: 1, id: linkedNode.id })
+          } else if (linkCounts.find(link => link.id === linkedNode.id)) {
+            linkCounts.find(link => link.id === linkedNode.id).count += 1;
+          } else {
+            console.log('could not find or count link in linkCounts array')
+          }
+        });
+
+
+        linkCounts.forEach(link => {
+          let radian = (Math.PI * 2) / link.count;
+          let relatedNode = ALL_NODES.find(node => node.id === link.id);
+          let radius = 200 / link.count;
+          
+          
+          debugger;
+
+        });
+      }
+
+    });
+
+    console.log(ALL_NODES);
   }
 
 }
@@ -124,7 +171,6 @@ class Node {
     this.name = this.getNameFromUrl(url);
     this.topLinksTo = topLinks;
     this.topLinkedBy = topLinkedBy;
-    this.coordHistory = [];
 
   }
 
@@ -132,6 +178,21 @@ class Node {
     // gets the name attribute from the end of a typical wiki url
     let titleString = url.match(/[^/]*$/)[0]
     return titleString;
+  }
+
+  setCoordinates(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  draw() {
+    let xMult = this.x * 110;
+    let yMult = this.y * 110;
+
+    strokeWeight(15);
+    stroke('white');
+    point(xMult, yMult);
   }
 
 }
