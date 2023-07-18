@@ -1,74 +1,17 @@
-import { X, Y, Z } from '../cartesian_grid_point_plotting';
+import axios from 'axios';
 
-export const ALL_NODES = [];
-
-export class CartesianTools {
-
-  constructor(width, IS_3D) {
-    this.radius = width * 0.7;
-    this.IS_3D = IS_3D;
-    // this is an abstract class used to establish
-    // magic numbers imposed by the limitations of 
-    // working in 3D space inside the browser
+export default class WikiData { 
+  constructor() {
+    this.ALL_NODES = [];
+    this.ALL_NODE_LINKS = [];
+    // wikidata provides some downloadable data which may end up being useful here
+    // requests can else be made to their API but per docs it is not recommended
+    // https://www.wikidata.org/wiki/Wikidata:Database_download
   }
+}
 
-  calculateRadiusOffsetCoordinates(coordinates) {
-    return [
-      coordinates[X] * this.radius,
-      coordinates[Y] * this.radius,
-      coordinates[Z] * this.radius
-    ]
-  }
-
-  axisCords3D() {
-    //returns an array of lines to be drawn in the sketch.draw() function
-    return [
-      [-1000, 0, 0, 1000, 0, 0],
-      [0, -1000, 0, 0, 1000, 0],
-      [0, 0, -1000, 0, 0, 1000]
-    ]
-  }
-
-  axisCords2D() {
-    //returns an array of lines to be drawn in the sketch.draw() function
-    return [
-      [-1000, 0, 1000, 0],
-      [0, -1000, 0, 1000],
-    ]
-  }
-
-  markCenter() {
-    stroke('black');
-    strokeWeight(this.IS_3D ? 15 : 10);
-    point(0, 0, 0);
-  }
-
-  draw3DAxis() {
-    // draw the axes
-    this.axisCords3D().forEach((cords, i) => {
-      this.setAxisStrokeColor(i);
-      strokeWeight(1);
-      line(...cords);
-    });
-    this.markCenter();
-  }
-
-  draw2DAxis() {
-    // draw the axes
-    this.axisCords2D().forEach((cords, i) => {
-      this.setAxisStrokeColor(i);
-      strokeWeight(1);
-      line(...cords);
-    });
-    this.markCenter();
-  }
-
-  setAxisStrokeColor(i) {
-    // set axis colors
-    if (i === 0) stroke('red'); // x axis
-    if (i === 1) stroke('green'); // y axis
-    if (i === 2) stroke('blue'); // z axis
-  }
+/* 
+class ANON {
 
   ingestWikiTestData(data) {
     // data is an array of node objects
@@ -147,8 +90,8 @@ export class CartesianTools {
           let radian = (Math.PI * 2) / link.count;
           let relatedNode = ALL_NODES.find(node => node.id === link.id);
           let radius = 200 / link.count;
-          
-          
+
+
           debugger;
 
         });
@@ -158,41 +101,5 @@ export class CartesianTools {
 
     console.log(ALL_NODES);
   }
-
 }
-
-class Node {
-  constructor(url, topLinks = [], topLinkedBy = []) {
-    this.id = ALL_NODES.length + 1;
-    this.x = null;
-    this.y = null;
-    this.z = null;
-    this.url = url;
-    this.name = this.getNameFromUrl(url);
-    this.topLinksTo = topLinks;
-    this.topLinkedBy = topLinkedBy;
-
-  }
-
-  getNameFromUrl(url) {
-    // gets the name attribute from the end of a typical wiki url
-    let titleString = url.match(/[^/]*$/)[0]
-    return titleString;
-  }
-
-  setCoordinates(x, y, z) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
-  draw() {
-    let xMult = this.x * 110;
-    let yMult = this.y * 110;
-
-    strokeWeight(15);
-    stroke('white');
-    point(xMult, yMult);
-  }
-
-}
+*/

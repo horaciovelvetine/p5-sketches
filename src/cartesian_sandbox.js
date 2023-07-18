@@ -1,7 +1,7 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
-import { data } from './data/wikid_it_myself.json'
-import { CartesianTools } from './util/cartesian_tools';
+import { DisplayTools } from './util/display_tools';
+import { Wikiverse } from './module/wikiverse/wikiverse';
 
 export const X = 0; // index values for relevant coordinate
 export const Y = 1; // axis in the array 
@@ -12,31 +12,15 @@ export const Z = 2;
 // for now this will mean constraining the mapping of points to the canvas size
 const IS_3D = false;
 
-let sketchGrid;
-let allNodes;
+let display = null; 
+let wikiverse = null;
 
 sketch.setup = function () {
-  if (IS_3D) createCanvas((windowWidth - 200), (windowHeight - 150), WEBGL);
-  else
-    createCanvas((windowWidth - 200), (windowHeight - 150));
-  sketchGrid = new CartesianTools(Window.windowWidth - 200, IS_3D);
-  allNodes = sketchGrid.ingestWikiTestData(data);
-
+  display = new DisplayTools(IS_3D);
+  wikiverse = new Wikiverse();
 }
 
 sketch.draw = function () {
   background(51);
-  if (IS_3D) {
-    sketchGrid.draw3DAxis();
-    orbitControl();
-  } else {
-    // center all items on the 2D canvas
-    translate(width / 2, height / 2, 0);
-    sketchGrid.draw2DAxis();
-  }
-  
-  allNodes.forEach(node => {
-    node.draw();
-  });
-
+  display.drawUI();
 }
