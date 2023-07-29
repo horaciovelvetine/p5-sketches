@@ -5,3 +5,4 @@ dist-ssr
 *.local
 .vscode
 .keep
+src/data/link_annotated_text.jsonl
