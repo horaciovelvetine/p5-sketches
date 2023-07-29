@@ -18,9 +18,9 @@ let wikiverse = null;
 sketch.setup = function () {
   display = new DisplayTools(IS_3D);
   wikiverse = new Wikiverse();
+  background(51);
 }
 
 sketch.draw = function () {
-  background(51);
   display.drawUI();
 }
