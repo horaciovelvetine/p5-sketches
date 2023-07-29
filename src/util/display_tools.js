@@ -1,4 +1,11 @@
 
+const DEV = {
+  // For 16" Macbook Pro
+  SCALE: 19,
+  WIDTH: 1500,
+  HEIGHT: 800,
+}
+
 
 export class DisplayTools {
   constructor(IS_3D) {
@@ -11,9 +18,9 @@ export class DisplayTools {
 
   setupCanvas() {
     if (this.IS_3D) {
-      createCanvas((windowWidth - 200), (windowHeight - 150), WEBGL);
+      createCanvas(1500, 800, WEBGL);
     } else {
-      createCanvas((windowWidth - 200), (windowHeight - 150));
+      createCanvas(1500, 800);
     }
   }
 
@@ -23,10 +30,7 @@ export class DisplayTools {
     translate(width / 2, height / 2);
     scale(1, -1);
     this.drawAxes();
-
-    
   }
-
 
   markCenterPoint() {
     stroke('black');
@@ -41,7 +45,7 @@ export class DisplayTools {
     if (i === 2) stroke('blue'); // z axis
   }
 
-  drawAxes(){
+  drawAxes() {
     this.getAxisCoordinates().forEach((cords, i) => {
       if ((i === 2) && !this.IS_3D) return;
       this.setAxisStrokeColor(i);
@@ -63,6 +67,27 @@ export class DisplayTools {
           [0, -1000, 0, 1000]
         ]
     )
+  }
+
+  draw2DPoint(dataPoint) {
+    //19 is a magic number to scale it to my display size
+    let x = dataPoint.cords[0] * 19;
+    let y = dataPoint.cords[1] * 19;
+    stroke(dataPoint.color);
+    strokeWeight(10);
+    point(x, y);
+  }
+
+  drawStrengthRadius(dataPoint) {
+    let radius = dataPoint.cords[2] * 19;
+    let x = dataPoint.cords[0] * 19;
+    let y = dataPoint.cords[1] * 19;
+    stroke(dataPoint.color);
+
+    // draw a circle indicating the intedned outer bounds
+    noFill();
+    strokeWeight(0.25);
+    ellipse(x, y, radius * 2, radius * 2);
   }
 
 }
