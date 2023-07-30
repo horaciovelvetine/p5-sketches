@@ -32,3 +32,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - [Nearest Neighbor Search](https://en.wikipedia.org/wiki/Nearest_neighbor_search)
 - [Any-angle path planning](https://en.wikipedia.org/wiki/Any-angle_path_planning)
 - [D3.js](https://d3js.org/)
+- [K-means clustering](https://en.wikipedia.org/wiki/K-means_clustering)
+- [KD: Naive K-means clustering](https://www.kdnuggets.com/2017/03/naive-sharding-centroid-initialization-method.html)
+- [Implementing K-means clustering in JS](https://github.com/stevemacn/kmeans)
