@@ -1,4 +1,5 @@
+import { SCALE_MULTIPLIER } from "../module/constants";
+
 export function scaleNumbers(...args) {
-  // 19 chosen for arbitrary starting point for now
-  return args.map((num) => { num * 19});
+  return args.map(cord => cord * SCALE_MULTIPLIER)
 }
