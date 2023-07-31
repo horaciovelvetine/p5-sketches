@@ -162,11 +162,9 @@ function recalculateCentroids(dataSet, labels, k) {
   return newCentroidList;
 }
 
-function kmeans(fullDataSet, k, useNaiveSharding = true) {
+function kmeans(dataset, k, useNaiveSharding = true) {
   // unpack cartesian cords from dataset:
-  let dataset = fullDataSet.map((d) => {
-    return d.cords;
-  })
+  
 
   if (dataset.length && dataset[0].length && dataset.length > k) {
     // Initialize book keeping variables
