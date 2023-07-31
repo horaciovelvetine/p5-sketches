@@ -35,3 +35,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - [K-means clustering](https://en.wikipedia.org/wiki/K-means_clustering)
 - [KD: Naive K-means clustering](https://www.kdnuggets.com/2017/03/naive-sharding-centroid-initialization-method.html)
 - [Implementing K-means clustering in JS](https://github.com/stevemacn/kmeans)
+- [js kmeans clustering](https://github.com/stevemacn/kmeans)
+- [more js k-means clustering](https://medium.com/geekculture/implementing-k-means-clustering-from-scratch-in-javascript-13d71fbcb31)
+- [Kensho Wiki Derived DataSet](https://www.kaggle.com/datasets/kenshoresearch/kensho-derived-wikimedia-data?select=statements.csv)
+- [Media wiki](https://www.mediawiki.org/wiki/API:Main_page)
