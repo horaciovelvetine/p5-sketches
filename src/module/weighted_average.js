@@ -24,6 +24,7 @@ export function weightedAverage(dataset) {
   let z = calc(zCords, strengths);
 
   let weightedStrengthsNode = new Node('weightedStrengths', [x, y, z], 'red');
+  // uses s value as a measure of how well the results fit the dataset
   weightedStrengthsNode.s = delta(dataset, weightedStrengthsNode);
 
   return weightedStrengthsNode;
