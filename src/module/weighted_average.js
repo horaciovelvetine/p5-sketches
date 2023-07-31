@@ -1,25 +1,40 @@
-import { X, Y, Z, W } from './constants.js';
-
+import { Node } from '../models/node.js';
+import { delta } from './delta.js';
 export function weightedAverage(dataset) {
-  
-  let x_cords = dataset.map(datPoint => {
-    return datPoint.cords[X];
-  });
+  // dataset will be an array of Nodes ==> './node.js
+  let xCords = dataset.map(node => {
+    return node.x;
+  })
 
-  let y_cords = dataset.map(datPoint => {
-    return datPoint.cords[Y];
-  });
+  let yCords = dataset.map(node => {
+    return node.y;
+  })
 
-  let weights = dataset.map(datPoint => {
-    return (1 / datPoint.cords[2]);
-  });
+  let zCords = dataset.map(node => {
+    return node.z;
+  })
 
-  let x = getWeightedAverage(x_cords, weights);
-  let y = getWeightedAverage(y_cords, weights);
+  let strengths = dataset.map(node => {
+    return node.s;
+  })
 
-  return {
-    name: 'WeightedAverage',
-    cords: [x, y],
-    color: 'white',
-  };
+
+  let x = calc(xCords, strengths);
+  let y = calc(yCords, strengths);
+  let z = calc(zCords, strengths);
+
+  let weightedStrengthsNode = new Node('weightedStrengths', [x, y, z], 'red');
+  weightedStrengthsNode.s = delta(dataset, weightedStrengthsNode);
+
+  return weightedStrengthsNode;
+}
+
+function calc(cords, strengths) {
+  let sum = 0;
+  let weightSum = 0;
+  for (let i = 0; i < cords.length; i++) {
+    sum += cords[i] * strengths[i];
+    weightSum += Number(strengths[i]);
+  }
+  return (sum / weightSum);
 }
