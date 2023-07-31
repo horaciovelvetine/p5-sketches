@@ -1,4 +1,4 @@
-import kmeans from '../module/kmeans.js';
+
 import { scaleNumbers } from "../util/scale_numbers";
 export class Centroid {
   constructor(weightedAvgNode, kMeansNode, relatedNodes) {
@@ -19,6 +19,7 @@ export class Centroid {
 
     this.relatedNodes.forEach(node => {
       node.draw();
+      node.drawStrengthRadius();
       this.connectCentroidsToRelatedNode(node);
     })
     this.weightedAvgNode.draw();
