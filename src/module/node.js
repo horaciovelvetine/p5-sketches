@@ -1,14 +1,14 @@
+import { scaleNumbers } from "../util/scale_numbers";
+
+
 class Node {
-  constructor(url) {
-    this.ID = 0;
-    this.url = url;
+  constructor(name) {
+    this.name = name;
     this.x = null;
     this.y = null;
     this.z = null;
-  }
+    this.color = 'black';
 
-  getTitle() {
-    return this.url.match(/[^/]*$/)[0];
   }
 
   setCoordinates(x, y, z) {
@@ -18,11 +18,15 @@ class Node {
   }
 
   draw() {
-    let xMult = this.x * 110;
-    let yMult = this.y * 110;
+    strokeWeight(10);
+    stroke(this.color);
+    let [x, y, z] = scaleNumbers(this.x, this.y, this.z);
+    point(x, y, z);
+  }
 
-    strokeWeight(15);
-    stroke('white');
-    point(xMult, yMult);
+  drawLabel() {}
+  
+  labelText() {
+    return this.name + ': (' + this.x + ', ' + this.y + ', ' + this.z + ')'
   }
 }

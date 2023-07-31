@@ -12,7 +12,6 @@ export class Centroid {
     this.DATASET = DATASET;
     this.weightedAverage = this.findUsingWeightedAverage(DATASET);
     this.kMeans = this.findUsingKmeans(DATASET);
-    this.kAlsoMeans = this.findUsingKmeans(DATASET);
   }
 
 

@@ -1,10 +1,6 @@
-const MAX_ITERATIONS = 50;
+import { randomNumBetween } from '../util/random_num_between.js';
 
-function randomBetween(min, max) {
-  return Math.floor(
-    Math.random() * (max - min) + min
-  );
-}
+const MAX_ITERATIONS = 50;
 
 function calcMeanCentroid(dataSet, start, end) {
   const features = dataSet[0].length;
@@ -46,7 +42,7 @@ function getRandomCentroids(dataset, k) {
   const centroidsIndex = [];
   let index;
   while (centroidsIndex.length < k) {
-    index = randomBetween(0, numSamples);
+    index = randomNumBetween(0, numSamples);
     if (centroidsIndex.indexOf(index) === -1) {
       centroidsIndex.push(index);
     }
@@ -167,6 +163,7 @@ function recalculateCentroids(dataSet, labels, k) {
 }
 
 function kmeans(fullDataSet, k, useNaiveSharding = true) {
+  // unpack cartesian cords from dataset:
   let dataset = fullDataSet.map((d) => {
     return d.cords;
   })

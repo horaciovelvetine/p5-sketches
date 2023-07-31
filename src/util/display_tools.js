@@ -26,6 +26,7 @@ export class DisplayTools {
     } else {
       createCanvas(DEV.WIDTH, DEV.HEIGHT);
     }
+    background(51);
   }
 
   drawUI() {
@@ -33,12 +34,12 @@ export class DisplayTools {
     // reverse y axis so y > 0 is up
     translate(width / 2, height / 2);
     // scale(1, -1);
-    // this.drawAxes();
+    this.drawAxes();
   }
 
   markCenterPoint() {
     stroke('black');
-    strokeWeight(15);
+    strokeWeight(5);
     point(0, 0, 0);
   }
 
