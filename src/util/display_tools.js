@@ -1,16 +1,3 @@
-
-const DEV = {
-  // For 16" Macbook Pro
-  SCALE: 19,
-  WIDTH: 1500,
-  HEIGHT: 800,
-}
-
-const X = 0;
-const Y = 1;
-const W = 2;
-
-
 export class DisplayTools {
   constructor(IS_3D) {
     //attributes
@@ -22,9 +9,9 @@ export class DisplayTools {
 
   setupCanvas() {
     if (this.IS_3D) {
-      createCanvas(DEV.WIDTH, DEV.HEIGHT, WEBGL);
+      createCanvas(800, 800, WEBGL);
     } else {
-      createCanvas(DEV.WIDTH, DEV.HEIGHT);
+      createCanvas(800, 800);
     }
     background(51);
   }
@@ -73,78 +60,4 @@ export class DisplayTools {
         ]
     )
   }
-
-  draw2DPoint(dataPoint) {
-    //19 is a magic number to scale it to my display size
-    let x = dataPoint.cords[0] * 19;
-    let y = dataPoint.cords[1] * 19;
-    stroke(dataPoint.color);
-    strokeWeight(10);
-    point(x, y);
-    strokeWeight(0.25);
-    fill(dataPoint.color);
-    text(this.pointLabelString(dataPoint), x + 15, y + 15);
-  }
-
-  pointLabelString(dataPoint) {
-    return dataPoint.name + ': (' + dataPoint.cords[0] + ', ' + dataPoint.cords[1] + ', ' + dataPoint.cords[2] + ')'
-  }
-
-  drawStrengthRadius(dataPoint) {
-    let radius = dataPoint.cords[2] * 19;
-    let x = dataPoint.cords[X] * 19;
-    let y = dataPoint.cords[Y] * 19;
-    stroke(dataPoint.color);
-
-    // draw a circle indicating the intedned outer bounds
-    noFill();
-    strokeWeight(0.25);
-    ellipse(x, y, radius * 2, radius * 2);
-  }
-
-  drawCentroid(centroid) {
-    let x = centroid.cords[X] * 19;
-    let y = centroid.cords[Y] * 19;
-    stroke(centroid.color);
-    fill(centroid.color);
-    strokeWeight(10);
-    point(x, y);
-    strokeWeight(0.25);
-    text(this.pointLabelString(centroid), x + 15, y + 15);
-  }
-
-  drawDistanceBetweenPoints(pointA, pointB, distance) {
-    let x1 = pointA.cords[X] * 19;
-    let y1 = pointA.cords[Y] * 19;
-    let x2 = pointB.cords[X] * 19;
-    let y2 = pointB.cords[Y] * 19;
-    stroke('black');
-    strokeWeight(0.25);
-    line(x1, y1, x2, y2);
-    text(pointA.cords[W], x1 + 15, y1 + 15);
-    text(distance.toFixed(2), (x1 + x2) / 2, (y1 + y2) / 2);
-  }
-
-  drawDistanceToCentroid(point, centroid, yOffset) {
-    let x1 = point.cords[X] * 19;
-    let y1 = point.cords[Y] * 19;
-    let x2 = centroid.cords[X] * 19;
-    let y2 = centroid.cords[Y] * 19;
-    let dist = centroid.actualDistances.filter((dat) => dat.name === point.name)[0].distance;
-    stroke(centroid.color);
-    fill(centroid.color);
-    strokeWeight(0.4);
-    line(x1, y1, x2, y2);
-    text(dist, x1 + 15, y1 + yOffset);
-  };
-
-  buildPointInfoString() {
-    let str = '';
-    str += `Point: ${this.name}\n`;
-    str += `X: ${this.cords[X]}\n`;
-    str += `Y: ${this.cords[Y]}\n`;
-    str += `W: ${this.cords[W]}\n`;
-    return str;
-  }
-
 }

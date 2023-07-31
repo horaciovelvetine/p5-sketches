@@ -30,7 +30,15 @@ export class Node {
     strokeWeight(0.1);
   }
 
-
+  drawStrengthRadius() {
+    // draws circle around node to represent intended strength of relationship
+    let radius = scaleNumbers(this.s)[0];
+    let [x, y, z] = scaleNumbers(this.x, this.y, this.z);
+    stroke(this.color);
+    strokeWeight(0.1);
+    noFill();
+    ellipse(x, y, radius, radius);
+  }
 
   labelText(x, y, z) {
     return this.name + ': (' + x + ', ' + y + ', ' + z + ')'
