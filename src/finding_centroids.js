@@ -1,57 +1,51 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 import { DisplayTools } from './util/display_tools';
-import { Centroid } from './module/centroid.js';
+import { randomCartCords } from './util/random_cart_cords';
+import { Node } from './models/node';
+import { determineCoordinates } from './module/determine_coordinates';
 
-let DISPLAY = null;
-let CENTROID = null;
+let display = null;
+let indecisiveNode = null;
+let relatedNodes = null;
+let centroid = null;
 
-const DEV = {
-  // For 16" Macbook Pro
-  SCALE: 19,
-  WIDTH: 1500,
-  HEIGHT: 800,
-}
-
-let scaledRandom = () => {
-  if (Math.random() > 0.5) {
-    return (Math.random() * DEV.SCALE * -1).toFixed(2);
-  }
-  return (Math.random() * DEV.SCALE).toFixed(2);
-}
-
-let randomPoint = () => {
-  return [scaledRandom(), scaledRandom(), Math.abs(scaledRandom())];
-}
-
-
-let POINTS_A = [
-  { name: 'A', cords: randomPoint(), color: 'orange' },
-  { name: 'B', cords: randomPoint(), color: 'orange' },
-  { name: 'C', cords: randomPoint(), color: 'orange' },
-  { name: 'D', cords: randomPoint(), color: 'orange' },
-  { name: 'E', cords: randomPoint(), color: 'orange' },
-  { name: 'F', cords: randomPoint(), color: 'orange' },
-  { name: 'G', cords: randomPoint(), color: 'orange' },
-  { name: 'H', cords: randomPoint(), color: 'orange' },
-  { name: 'I', cords: randomPoint(), color: 'orange' },
-]
 
 sketch.setup = function () {
-  DISPLAY = new DisplayTools(false);
-  CENTROID = new Centroid(POINTS_A);
+  display = new DisplayTools(false);
+  indecisiveNode = new Node('Indecisive', [null, null, null], 'orange');
+  relatedNodes = [
+  new Node('A', randomCartCords(-1,1), 'orange'),
+  new Node('B', randomCartCords(-1,1), 'orange'),
+  new Node('C', randomCartCords(-1,1), 'orange'),
+  new Node('D', randomCartCords(-1,1), 'orange'),
+  new Node('E', randomCartCords(-1,1), 'orange'),
+  new Node('F', randomCartCords(-1,1), 'orange'),
+  new Node('G', randomCartCords(-1,1), 'orange'),
+  new Node('H', randomCartCords(-1,1), 'orange'),
+  new Node('I', randomCartCords(-1,1), 'orange'),
+  new Node('J', randomCartCords(-1,1), 'orange'),
+  new Node('K', randomCartCords(-1,1), 'orange'),
+  new Node('L', randomCartCords(-1,1), 'orange'),
+  new Node('M', randomCartCords(-1,1), 'orange'),
+  new Node('N', randomCartCords(-1,1), 'orange'),
+  new Node('O', randomCartCords(-1,1), 'orange'),
+  new Node('P', randomCartCords(-1,1), 'orange'),
+  new Node('Q', randomCartCords(-1,1), 'orange'),
+  new Node('R', randomCartCords(-1,1), 'orange'),
+  new Node('S', randomCartCords(-1,1), 'orange'),
+  new Node('U', randomCartCords(-1,1), 'orange'),
+  new Node('V', randomCartCords(-1,1), 'orange'),
+  new Node('W', randomCartCords(-1,1), 'orange'),
+  new Node('X', randomCartCords(-1,1), 'orange'),
+  new Node('Y', randomCartCords(-1,1), 'orange'),
+  new Node('Z', randomCartCords(-1,1), 'orange'),
+  ]
+  centroid = determineCoordinates(indecisiveNode, relatedNodes);
+
 }
 
 sketch.draw = function () {
-  DISPLAY.drawUI();
-  DISPLAY.drawCentroid(CENTROID.weightedAverage);
-  DISPLAY.drawCentroid(CENTROID.kMeans);
-
-  POINTS_A.forEach((dat) => {
-    DISPLAY.draw2DPoint(dat);
-    DISPLAY.drawStrengthRadius(dat);
-    DISPLAY.drawDistanceToCentroid(dat, CENTROID.weightedAverage, 30);
-    DISPLAY.drawDistanceToCentroid(dat, CENTROID.kMeans, 45);
-  });
-
+  display.drawUI();
+  centroid.drawPotentialCentroidVisuals();
 }
