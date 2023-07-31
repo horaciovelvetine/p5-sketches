@@ -1,26 +1,28 @@
 import kmeans from './kmeans';
 import { Node } from '../models/node';
-import { K } from './constants';
 import { weightedAverage } from './weighted_average';
 import { delta } from './delta';
 import { Centroid } from '../models/centroid';
 
 export function determineCoordinates(node, relatedNodes) {
-  let weightedAverageResults = weightedAverage(relatedNodes);
-  let kMeansResults = kMeansAdapter(relatedNodes);
+  let wAResults = weightedAverage(relatedNodes);
+  let kResults = kMeansAdapter(relatedNodes, 1);
 
-  return new Centroid(weightedAverageResults, kMeansResults, relatedNodes);
+  return new Centroid(wAResults, kResults, relatedNodes);
 }
 
-function kMeansAdapter(dataset) {
+function kMeansAdapter(dataset, kDepth) {
   let prep = dataset.map(node => {
     return node.getCoordinates();
   })
+  let results = kmeans(prep, kDepth);
 
-  let results = kmeans(prep, K).centroids[0];
-  let kMeansResults = new Node(`kMeans (k=${K})`, results, 'white');
+  let cords = results.centroids[0];
+  let kMeansResults = new Node(`kMeans (k=${kDepth})`, cords, 'white');
   kMeansResults.s = delta(dataset, kMeansResults);
-  kMeansResults.setCoordinates(...results)
+  kMeansResults.setCoordinates(...cords)
+  console.log('kMeans results', results);
 
   return kMeansResults;
+
 }
