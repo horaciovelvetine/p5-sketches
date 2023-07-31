@@ -1,25 +1,15 @@
-const X = 0;
-const Y = 1;
-const W = 2;
-
-import kmeans from './kmeans.js';
+import kmeans from '../module/kmeans.js';
 
 export class Centroid {
-
-
-  constructor(DATASET) {
-    // TBD
-    this.DATASET = DATASET;
-    this.weightedAverage = this.findUsingWeightedAverage(DATASET);
-    this.kMeans = this.findUsingKmeans(DATASET);
+  constructor(relatedNodes) {
+    
+    this.relatedNodes = relatedNodes;
+    this.weightedAverage = this.findUsingWeightedAverage(relatedNodes);
+    // this.kMeans = this.findUsingKmeans(DATASET);
   }
 
 
-  findUsingWeightedAverage(pointsArray) {
-    // pointsArray is an array of objects with the following structure:
-    // {name: 'A', cords: [x, y, w], color: 'null'}
-    // where x,y represent the coordinates of the point
-    // and w represents the weight of the point in relation to the centroid
+  findUsingWeightedAverage(relatedNodes) {
     let x_cords = pointsArray.map(datPoint => {
       return datPoint.cords[X];
     })

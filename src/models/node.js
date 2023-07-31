@@ -1,14 +1,13 @@
 import { scaleNumbers } from "../util/scale_numbers";
+import { X, Y, Z } from "../module/constants";
 
-
-class Node {
-  constructor(name) {
+export class Node {
+  constructor(name, cords, color) {
     this.name = name;
-    this.x = null;
-    this.y = null;
-    this.z = null;
-    this.color = 'black';
-
+    this.x = cords[X];
+    this.y = cords[Y];
+    this.z = cords[Z];
+    this.color = color;
   }
 
   setCoordinates(x, y, z) {
@@ -24,8 +23,8 @@ class Node {
     point(x, y, z);
   }
 
-  drawLabel() {}
-  
+  drawLabel() { }
+
   labelText() {
     return this.name + ': (' + this.x + ', ' + this.y + ', ' + this.z + ')'
   }
