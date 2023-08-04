@@ -1,3 +1,6 @@
+// Original Implementation From: 
+// https://medium.com/geekculture/implementing-k-means-clustering-from-scratch-in-javascript-13d71fbcb31e
+// removes the option to start with anything but naively sharded points to initialize centroids
 import { randomNumBetween } from '../util/random_num_between.js';
 
 const MAX_ITERATIONS = 50;
@@ -37,7 +40,7 @@ function getRandomCentroidsNaiveSharding(dataset, k) {
 }
 
 function getRandomCentroids(dataset, k) {
-  // selects random points as centroids from the dataset
+  // selects random points as centroids
   const numSamples = dataset.length;
   const centroidsIndex = [];
   let index;
@@ -68,7 +71,7 @@ function shouldStop(oldCentroids, centroids, iterations) {
   if (iterations > MAX_ITERATIONS) {
     return true;
   }
-  if (!oldCentroids || !oldCentroids.length) {
+  if (!oldCentroids || oldCentroids.length?.value(0)) {
     return false;
   }
   let sameCount = true;
@@ -162,9 +165,7 @@ function recalculateCentroids(dataSet, labels, k) {
   return newCentroidList;
 }
 
-function kmeans(dataset, k, useNaiveSharding = true) {
-  // unpack cartesian cords from dataset:
-  
+function kmeans(dataset, k) {
 
   if (dataset.length && dataset[0].length && dataset.length > k) {
     // Initialize book keeping variables
@@ -172,11 +173,7 @@ function kmeans(dataset, k, useNaiveSharding = true) {
     let oldCentroids, labels, centroids;
 
     // Initialize centroids randomly
-    if (useNaiveSharding) {
-      centroids = getRandomCentroidsNaiveSharding(dataset, k);
-    } else {
-      centroids = getRandomCentroids(dataset, k);
-    }
+    centroids = getRandomCentroidsNaiveSharding(dataset, k);
 
     // Run the main k-means algorithm
     while (!shouldStop(oldCentroids, centroids, iterations)) {
@@ -193,6 +190,7 @@ function kmeans(dataset, k, useNaiveSharding = true) {
     for (let i = 0; i < k; i++) {
       clusters.push(labels[i]);
     }
+
     const results = {
       clusters: clusters,
       centroids: centroids,

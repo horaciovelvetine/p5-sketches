@@ -1,4 +1,4 @@
-//* Base constants and config values for calculations
+//* Base constants and config values
 
 export const X = 0;
 export const Y = 1;

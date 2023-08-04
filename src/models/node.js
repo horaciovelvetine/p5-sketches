@@ -35,7 +35,7 @@ export class Node {
     let radius = scaleNumbers(this.s)[0];
     let [x, y, z] = scaleNumbers(this.x, this.y, this.z);
     stroke(this.color);
-    strokeWeight(0.1);
+    strokeWeight(0.2);
     noFill();
     ellipse(x, y, radius, radius);
   }

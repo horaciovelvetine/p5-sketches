@@ -1,6 +1,6 @@
 import { Node } from '../models/node.js';
 import { delta } from './delta.js';
-export function weightedAverage(dataset) {
+function weightedMeanAverage(dataset) {
   // dataset will be an array of Nodes ==> './node.js
   let xCords = dataset.map(node => {
     return node.x;
@@ -39,3 +39,6 @@ function calc(cords, strengths) {
   }
   return (sum / weightSum);
 }
+
+
+export default weightedMeanAverage;

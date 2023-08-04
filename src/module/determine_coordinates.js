@@ -1,14 +1,14 @@
 import kmeans from './kmeans';
 import { Node } from '../models/node';
-import { weightedAverage } from './weighted_average';
+import { weightedMeanAverage } from './weighted_mean_average';
 import { delta } from './delta';
 import { Centroid } from '../models/centroid';
 
 export function determineCoordinates(node, relatedNodes) {
-  let wAResults = weightedAverage(relatedNodes);
+  let wMAResults = weightedMeanAverage(relatedNodes);
   let kResults = kMeansAdapter(relatedNodes, 1);
 
-  return new Centroid(wAResults, kResults, relatedNodes);
+  return new Centroid(wMAResults, kResults, relatedNodes);
 }
 
 function kMeansAdapter(dataset, kDepth) {
