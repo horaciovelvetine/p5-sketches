@@ -1,4 +1,4 @@
-import '../css/style.css';
+import './css/style.css';
 import { sketch } from 'p5js-wrapper';
 import { DisplayTools } from './util/display_tools';
 import { randomCartCords } from './util/random_cart_cords';

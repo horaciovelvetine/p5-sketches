@@ -1,4 +1,4 @@
-import '../css/style.css';
+import './css/style.css';
 import { sketch } from 'p5js-wrapper';
 import { DisplayTools } from './util/display_tools';
 import { Wikiverse } from './module/wikiverse/wikiverse';

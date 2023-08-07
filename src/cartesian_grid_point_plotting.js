@@ -1,4 +1,4 @@
-import '../css/style.css';
+import './css/style.css';
 import { sketch } from 'p5js-wrapper';
 import { testObjects } from './data/wikiverse_test_objects.json';
 import { CartesianTools } from './util/cartesian_tools';
