@@ -1,4 +1,4 @@
-import '../css/style.css';
+import './css/style.css';
 import { sketch } from 'p5js-wrapper';
 
 class Ball {
